@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time Leave Calculator</title>
+    <style>
+      body {
+        background-color: black;
+        text-align: center;
+        color: white;
+        font-size: 32px;
+      }
+
+      .neonText {
+        animation: flicker 1.5s infinite alternate;
+        color: #000000;
+      }
+
+      /* Flickering animation */
+      @keyframes flicker {
+        0%,
+        18%,
+        22%,
+        25%,
+        53%,
+        57%,
+        100% {
+          text-shadow: 0 0 4px #2ee1e1, 0 0 11px#2ee1e1, 0 0 19px #2ee1e1,
+            0 0 40px #0fa, 0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa,
+            0 0 150px #0fa;
+        }
+
+        20%,
+        24%,
+        55% {
+          text-shadow: none;
+        }
+      }
+
+      /* Error */
+
+      .erro {
+        color: #ff0000;
+      }
+
+      select {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="neonText">Time Leave Calculator</h1>
+    <form action="/calculate" method="post">
+      Start Time:
+      <select name="start_hour">
+        {% for hour in range(1, 13) %}
+        <option value="{{ hour }}">{{ hour }}</option>
+        {% endfor %}
+      </select>
+      :
+      <select name="start_minute">
+        {% for minute in range(0, 60) %}
+        <option value="{{ minute }}">{{ "%02d" % minute }}</option>
+        {% endfor %}
+      </select>
+      <select name="start_period">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option></select
+      ><br />
+      <p></p>
+
+      Lunch Start:
+      <select name="lunch_start_hour">
+        {% for hour in range(1, 13) %}
+        <option value="{{ hour }}">{{ hour }}</option>
+        {% endfor %}
+      </select>
+      :
+      <select name="lunch_start_minute">
+        {% for minute in range(0, 60) %}
+        <option value="{{ minute }}">{{ "%02d" % minute }}</option>
+        {% endfor %}
+      </select>
+      <select name="lunch_start_period">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option></select
+      ><br />
+      <p></p>
+
+      Lunch End:
+      <select name="lunch_end_hour">
+        {% for hour in range(1, 13) %}
+        <option value="{{ hour }}">{{ hour }}</option>
+        {% endfor %}
+      </select>
+      :
+      <select name="lunch_end_minute">
+        {% for minute in range(0, 60) %}
+        <option value="{{ minute }}">{{ "%02d" % minute }}</option>
+        {% endfor %}
+      </select>
+      <select name="lunch_end_period">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option></select
+      ><br />
+      <p></p>
+
+      <input type="submit" value="Calculate" />
+    </form>
+
+    {% if result %}
+    <h2>Result:</h2>
+    <p>Leave time calculated: {{ result }}</p>
+    {% endif %}
+  </body>
+</html>
